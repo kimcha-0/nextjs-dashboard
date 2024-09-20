@@ -28,6 +28,37 @@ export async function createInvoice(formData: FormData) {
         VALUES (${customerId}, ${amountInCents}, ${status}, ${date})
     `;
 
+    // purges cache data related to specified path
+    // cache invalidation occurs when next path is visited since this is a dynamic path
+    revalidatePath('/dashboard/invoices');
+    redirect('/dashboard/invoices');
+}
+
+export async function editInvoice(id: string, formData: FormData) {
+    const { customerId, amount, status } = CreateInvoice.parse({
+        customerId: formData.get('customerId'),
+        amount: formData.get('amount'),
+        status: formData.get('status')
+    });
+
+    const amountInCents = amount * 100;
+    
+    await sql`
+        UPDATE invoices
+            SET customer_id = ${customerId}, amount = ${amountInCents}, status = ${status}
+            WHERE id = ${id}
+    `;
+
+    revalidatePath('/dashboard/invoices');
+    redirect('/dashboard/invoices');
+
+}
+
+export async function deleteInvoice(id: string) {
+    await sql`
+        DELETE from INVOICES
+            WHERE id = ${id}
+    `;
     revalidatePath('/dashboard/invoices');
     redirect('/dashboard/invoices');
 }
