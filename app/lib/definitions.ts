@@ -4,7 +4,7 @@
 // However, these types are generated automatically if you're using an ORM such as Prisma.
 export type State = {
     message: any;
-    error: any;
+    errors: any;
 };
 
 export type User = {
