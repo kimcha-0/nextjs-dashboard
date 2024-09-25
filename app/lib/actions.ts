@@ -31,12 +31,11 @@ export async function createInvoice(formData: FormData) {
             INSERT INTO invoices (customer_id, amount, status, date)
             VALUES (${customerId}, ${amountInCents}, ${status}, ${date})
             `;
-    } catch(e) {
+    } catch (e) {
         return {
-            message: 'Database error: failed to create invoice'
+            message: `failed to create invoice ${e}`
         }
     }
-
     // purges cache data related to specified path
     // cache invalidation occurs when next path is visited since this is a dynamic path
     revalidatePath('/dashboard/invoices');
@@ -52,7 +51,6 @@ export async function editInvoice(id: string, formData: FormData) {
 
 
     const amountInCents = amount * 100;
-
     try {
         await sql`
             UPDATE invoices
@@ -61,9 +59,10 @@ export async function editInvoice(id: string, formData: FormData) {
             `;
     } catch (e) {
         return {
-            message: 'Database error: failed to update invoice'
+            message:`Failed to update invoice ${e}`
         }
     }
+
     revalidatePath('/dashboard/invoices');
     redirect('/dashboard/invoices');
 
@@ -80,7 +79,7 @@ export async function deleteInvoice(id: string) {
         return {message: 'Deleted Invoice'}
     } catch (e) {
         return {
-            message: 'Database error: failed to delete invoice'
+            message: `Database error: failed to delete invoice ${e}`
         }
     }
 }

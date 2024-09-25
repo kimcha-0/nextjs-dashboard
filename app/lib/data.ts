@@ -37,14 +37,14 @@ export async function fetchLatestInvoices() {
         ORDER BY invoices.date DESC
         LIMIT 5`;
         console.log('Fetching latest invoices data...');
-        await new Promise((resolve) => setTimeout(resolve, 2000));
+//         await new Promise((resolve) => setTimeout(resolve, 2000));
 
 
         const latestInvoices = data.rows.map((invoice) => ({
             ...invoice,
             amount: formatCurrency(invoice.amount),
         }));
-        console.log('Data fetch completed after 2 seconds.');
+  //       console.log('Data fetch completed after 2 seconds.');
         return latestInvoices;
     } catch (error) {
         console.error('Database Error:', error);

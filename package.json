@@ -14,6 +14,7 @@
     "bcrypt": "^5.1.1",
     "canary": "^0.2.5",
     "clsx": "^2.1.1",
+    "eslint": "^9.11.1",
     "next": "15.0.0-canary.160",
     "next-auth": "5.0.0-beta.21",
     "node": "^22.9.0",
@@ -29,11 +30,9 @@
     "@types/bcrypt": "^5.0.2",
     "@types/node": "20.14.8",
     "@types/react": "18.3.3",
-    "@types/react-dom": "18.3.0",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.13"
+    "@types/react-dom": "18.3.0"
   },
   "engines": {
-    "node": ">=20.12.0"
+    "node": "20.x"
   }
 }
