@@ -59,7 +59,7 @@ export async function editInvoice(id: string, formData: FormData) {
             `;
     } catch (e) {
         return {
-            message:`Failed to update invoice ${e}`;
+            message:`Failed to update invoice ${e}`
         }
     }
 
